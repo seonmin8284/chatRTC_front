@@ -8,7 +8,7 @@ function App() {
   const mediaRecorder = useRef(null);
 
   useEffect(() => {
-    ws.current = new WebSocket("wss://your-api-domain.up.railway.app/ws/stt");
+    ws.current = new WebSocket("wss://conference.railway.internal/ws/stt");
     ws.current.onmessage = (e) => setLogs((prev) => [...prev, e.data]);
   }, []);
 
@@ -26,7 +26,7 @@ function App() {
   const stop = () => mediaRecorder.current.stop();
 
   const summarize = async () => {
-    const res = await fetch("https://your-api-domain.up.railway.app/summary", {
+    const res = await fetch("https://conference.railway.internal/summary", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text: logs.join(" ") }),
